@@ -1,0 +1,11 @@
+1.how does array passed into a static method update its contents in the main method 
+which is outside of context;
+without using ref or out?
+
+2.ArrayUtils and GenMethDemo - array copy mechanism
+
+3.study GenIntfDemo , GenIseries , ThreeD , ByTwos .cs
+
+4.CompareDemo.cs & MyClass5.cs
+
+5.ContravarianceDemo.cs & MyClass8.cs

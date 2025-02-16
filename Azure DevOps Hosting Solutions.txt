@@ -1,0 +1,117 @@
+for free
+To host a .NET web app for free using Azure DevOps and Azure App Service, you can utilize the free tiers available in both services. Here's a detailed guide on how to achieve this:
+
+Steps to Host a .NET Web App for Free:
+1. Sign Up for Azure and Azure DevOps:
+Azure Account: Sign up for a free Azure account if you don't already have one. The free account includes 12 months of popular free services and a \$200 credit for the first 30 days.
+
+Azure DevOps: Sign up for a free Azure DevOps account.
+
+2. Create a New Project in Azure DevOps:
+Repository: Create a new repository in Azure DevOps and push your .NET web app code to it.
+
+3. Set Up Build Pipeline:
+Navigate to Pipelines: In your Azure DevOps project, go to the Pipelines section.
+
+Create a New Pipeline: Click on "New Pipeline" and choose your repository.
+
+YAML Configuration: Use the following example azure-pipelines.yml to set up your build pipeline:
+
+yaml
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  buildConfiguration: 'Release'
+
+steps:
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '6.x.x'
+    installationPath: $(Agent.ToolsDirectory)/dotnet
+
+- script: |
+    dotnet build --configuration $(buildConfiguration)
+  displayName: 'Build project'
+
+- script: |
+    dotnet publish --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)
+  displayName: 'Publish project'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+4. Create an Azure App Service:
+Free Tier: Use the free tier of Azure App Service to host your web app. The free tier provides 1 GB of storage and limited features but is sufficient for small applications.
+
+Create App Service: In the Azure portal, create a new App Service instance and select the "Free" pricing tier.
+
+5. Set Up Release Pipeline:
+Navigate to Releases: In the Pipelines section, go to Releases.
+
+New Release Pipeline: Click on "New Pipeline".
+
+Add an Artifact: Select the build artifact from your build pipeline.
+
+Add a Stage: Add a stage and choose "Azure App Service deployment".
+
+Configure Deployment: Choose your Azure subscription and the newly created App Service instance.
+
+6. Deploy Your Web App:
+Run the Pipeline: Save and queue the build pipeline.
+
+Deploy: The release pipeline should automatically trigger after a successful build, deploying your .NET web app to the Azure App Service.
+
+Example Pipeline YAML:
+Here’s a complete example combining build and release:
+
+yaml
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  buildConfiguration: 'Release'
+
+steps:
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '6.x.x'
+    installationPath: $(Agent.ToolsDirectory)/dotnet
+
+- script: |
+    dotnet build --configuration $(buildConfiguration)
+  displayName: 'Build project'
+
+- script: |
+    dotnet publish --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)
+  displayName: 'Publish project'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+
+- stage: 'Deploy'
+  jobs:
+  - deployment: DeployWebApp
+    environment: 'production'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - download: current
+            artifact: drop
+
+          - task: AzureWebApp@1
+            inputs:
+              azureSubscription: '<Your Azure Subscription>'
+              

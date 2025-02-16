@@ -1,0 +1,131 @@
+Basic Git Commands:
+Initialize a Repository:
+
+sh
+git init
+Initializes a new Git repository.
+
+Clone a Repository:
+
+sh
+git clone <repository_url>
+Clones an existing repository from a remote location.
+
+Check the Status:
+
+sh
+git status
+Displays the state of the working directory and the staging area.
+
+Track New Files:
+
+sh
+git add <file_name>
+git add .
+Adds files to the staging area.
+
+Commit Changes:
+
+sh
+git commit -m "Your commit message"
+Records changes to the repository with a descriptive message.
+
+Push Changes to Remote:
+
+sh
+git push origin <branch_name>
+Pushes local changes to the remote repository.
+
+Pull Changes from Remote:
+
+sh
+git pull origin <branch_name>
+Fetches and merges changes from the remote repository.
+
+Branch Management:
+Create a New Branch:
+
+sh
+git branch <branch_name>
+Creates a new branch.
+
+Switch to a Branch:
+
+sh
+git checkout <branch_name>
+Switches to the specified branch.
+
+Create and Switch to a New Branch:
+
+sh
+git checkout -b <branch_name>
+Creates and switches to a new branch in one command.
+
+Merge Branches:
+
+sh
+git merge <branch_name>
+Merges the specified branch into the current branch.
+
+Advanced Commands:
+Rebase Branches:
+
+sh
+git rebase <branch_name>
+Reapplies commits on top of another base tip.
+
+Stash Changes:
+
+sh
+git stash
+Temporarily shelves changes for working on something else.
+
+Apply Stashed Changes:
+
+sh
+git stash apply
+Applies the stashed changes back to the working directory.
+
+Show Commit History:
+
+sh
+git log
+Displays a list of all the commits in the repository.
+
+View Differences:
+
+sh
+git diff
+Shows the differences between files in the working directory and the staging area.
+
+Remote Management:
+Add a Remote:
+
+sh
+git remote add <remote_name> <repository_url>
+Adds a new remote repository.
+
+Remove a Remote:
+
+sh
+git remote remove <remote_name>
+Removes a remote repository.
+
+Show Remotes:
+
+sh
+git remote -v
+Lists remote repositories.
+
+Undoing Changes:
+Discard Changes in a File:
+
+sh
+git checkout -- <file_name>
+Discards changes in the working directory.
+
+Reset to a Previous Commit:
+
+sh
+git reset --hard <commit_hash>
+Resets the repository to a specified commit, discarding all changes.

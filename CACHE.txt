@@ -1,0 +1,351 @@
+https://localhost:8080 - apache httpd web server
+
+Django Startup
+to activate virtual environment enter
+source .venv/bin/activate in terminal
+and create a new terminal window
+
+
+In C#, you can use the `var` keyword to create an object without explicitly specifying its type. The compiler infers the type from the right-hand side of the assignment. Here's a simple example:
+
+```csharp
+var person = new Person();
+```
+
+In this example, `person` is implicitly typed as `Person` because of the `new Person()` assignment. Here are a few more examples to illustrate different scenarios:
+
+1. **Creating a List:**
+   ```csharp
+   var numbers = new List<int> { 1, 2, 3, 4, 5 };
+   ```
+
+2. **Using Anonymous Types:**
+   ```csharp
+   var anonymousObject = new { Name = "John", Age = 30 };
+   Console.WriteLine($"Name: {anonymousObject.Name}, Age: {anonymousObject.Age}");
+   ```
+
+3. **With LINQ Queries:**
+   ```csharp
+   var query = from num in numbers
+               where num > 2
+               select num;
+   ```
+
+Remember, `var` can only be used when the type of the variable is clear from the context. It doesn't mean the variable is loosely typed; the type is determined at compile time¹².
+
+If you have any specific use case or further questions, feel free to ask!
+
+Source: Conversation with Copilot, 11/12/2024
+(1) Implicitly typed local variables - C# | Microsoft Learn. https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/implicitly-typed-local-variables.
+(2) new operator - Create and initialize a new instance of a type - C# .... https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/new-operator.
+(3) Declaration statements - local variables and constants, var, local .... https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/declarations.
+
+To improve performance in a data driven dotnet core web app:
+EF core uses connection pooling by default!
+add MultipleActiveResultSets=true; in the connection string
+use a single context object througout the ApplicationDbContext.
+
+
+If you're looking for free hosting options for your ASP.NETWebForms application, here are a few providers that offer free plans:
+
+MonsterASP.NET: They offer free hosting for ASP.NETand .NET Core technologies, including ASP.NETWebForms. You can try their free hosting here.
+
+FreeASPHosting.net: This provider offers free ASP.NEThosting with support for various .NET versions, including .NET Framework 4.8 and ASP.NETWebForms. Check out their free hosting here.
+
+Somee.com: They provide free Windows ASP.NEThosting with support for ASP.NETWebForms. 
+You can explore their free hosting options here.
+
+MyASP.NET: Allows you to host your ASP.NETwebsite for free. It supports various .NET versions and provides a reliable hosting environment
+
+dotnet------------------------------------------------
+MAUI
+ASP.Net Core
+Blazor
+Windows Forms
+Windows Presentation Foundation
+ML.Net
+SignalR
+
+Beginner AI Projects----------------------------------
+Handwritten Digit Recognition: Build a system that can recognize handwritten digits using Convolutional Neural Networks (CNNs)1
+
+
+Chatbot: Create a conversational bot using Natural Language Processing (NLP) to interact with users and answer their questions2
+
+
+Sentiment Analysis: Use supervised learning algorithms to classify the sentiment of text data, such as tweets or reviews2
+
+
+Object Detection: Develop an algorithm that can detect objects in images using computer vision techniques2
+
+
+Image Captioning: Create an algorithm that automatically generates captions for images by combining computer vision and NLP2
+
+
+Music Generation: Utilize deep learning to generate music compositions based on existing music datasets2
+
+
+Next-Word Prediction: Build a model that predicts the next word in a sentence, useful for text editors and chat applications.
+
+Sensitive Content Detector: Use machine learning to detect and filter inappropriate or sensitive content in images, videos, or text2
+
+
+Spam Email Filter: Create a system that can identify and filter out spam emails using machine learning techniques.
+
+Stock Price Prediction: Develop a model to predict stock prices based on historical data and trends.
+
+
+
+if u have css issues in browser while creating a web app in visual studio ide just ctrl+f5 in browser...
+
+dotnet MAUI
+Blazor Hybrid
+Win UI WinAppSDK
+Win Forms
+WPF
+React Native for Windows
+Unity
+
+C#
+E:\WORKSPACE\Projects\dotnet\studyC#
+Java
+E:\WORKSPACE\Projects\java
+C
+E:\WORKSPACE\Projects\c
+CSS
+E:\WORKSPACE\Projects\tailwind\public
+
+
+11,68,66,234,13,65
+
+CSS
+.card {
+      box-shadow: 0 0 5px 0 ;
+      background: inherit;
+      backdrop-filter: blur(10px);
+      <!--margin: 100px; according to your need-->
+}
+
+
+JS Event Listener
+
+<body>
+  <h1 id="heading">Hello, codedamn!</h1>
+  <button id="updateBtn">Update Text</button>
+
+  <script>
+    let name = "World";
+    const updateText = () => {
+      document.getElementById("heading").innerHTML = `Hello, ${name}!`;
+    }
+
+    document.getElementById("updateBtn").addEventListener("click", updateText);
+  </script>
+
+SQL QUERY FOR :- CREATING AN ACCOUNT
+
+create procedure createAccounts(in name varchar(20),in pword varchar(30))
+begin
+declare akey varchar(20);
+DECLARE ash blob(20);
+declare rand binary(20);
+set akey="carpe diem";
+set rand=RANDOM_BYTES(8);
+set ash=AES_ENCRYPT(pword,akey,rand);
+insert into userDetails (`userName`,password) values (name,hex(ash));
+end$
+
+call `createAccounts` ('allen', 'joyboy') $
+
+SQL AES ENCRYPTION 
+
+set @value='hi';
+set @key='joyboy';
+set @random=RANDOM_BYTES(10);
+set @crypt=AES_ENCRYPT(@value,@key,@random);
+set @u=AES_DECRYPT(@crypt,@key,@random);
+select cast(@u as char) ;
+
+
+CSS DOCS
+https://www.codecademy.com/resources/docs/css
+
+PROJECT 
+C search project finished 
+file:-  fork.c
+only runs in linux
+
+linux c directory access
+https://man7.org/linux/man-pages/man0/dirent.h.0p.html
+C Library - windows.h | ArunEworld | C programming Launguage https://aruneworld.com/programming-language/c/c-library/c-library-windows-h/
+windows api functions in windows.h
+https://learn.microsoft.com/en-us/previous-versions//aa383686(v=vs.85)
+
+CSS (the button sizes)
+https://youtube.com/shorts/WFMqJhwcZ0Y?si=2S6wjjpZ8EIi--je
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+The code I provided is written for Unix-based systems (like Linux or macOS) and uses POSIX functions, which are not available on Windows.
+
+To run this code on Windows, you would need to:
+
+1. Replace the dirent.h header with windows.h and use the Windows API functions for directory traversal.
+2. Replace the stat function with the Windows API function GetFileAttributes.
+3. Replace the S_ISDIR macro with a check for the FILE_ATTRIBUTE_DIRECTORY flag.
+
+Here's an example of how you could modify the code to run on Windows:
+
+#include <windows.h>
+#include <stdio.h>
+#include <string.h>
+
+void search_file(char *filename, char *path) {
+    WIN32_FIND_DATA find_data;
+    HANDLE h_find;
+    char new_path[MAX_PATH];
+
+    sprintf(new_path, "%s\\*.*", path);
+    h_find = FindFirstFile(new_path, &find_data);
+    if (h_find == INVALID_HANDLE_VALUE) {
+        return;
+    }
+
+    do {
+        if (strcmp(find_data.cFileName, filename) == 0) {
+            printf("File found: %s\\%s\n", path, filename);
+        } else if (find_data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) {
+            sprintf(new_path, "%s\\%s", path, find_data.cFileName);
+            search_file(filename, new_path);
+        }
+    } while (FindNextFile(h_find, &find_data));
+
+    FindClose(h_find);
+}
+
+int main() {
+    char filename[100];
+    printf("Enter the filename: ");
+    scanf("%s", filename);
+    search_file(filename, ".");
+    return 0;
+}
+
+Note that this code uses the Windows API functions FindFirstFile, FindNextFile, and FindClose to traverse directories, and checks for directories using the FILE_ATTRIBUTE_DIRECTORY flag.
+--------------------------------------------------------------------------------------------------------------------------------------------
+To recursively search for a file using only its filename in C, you can use the following steps:
+
+1. Start at the root directory.
+2. Open the current directory.
+3. Read the contents of the directory.
+4. For each entry:
+    - If it's a file, check if its name matches the target filename.
+    - If it's a directory, recursively repeat steps 2-4.
+5. If the target file is found, print its path and return.
+
+Here's a sample implementation:
+
+#include <dirent.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+void search_file(char *filename, char *path) {
+    DIR *dir;
+    struct dirent *ent;
+    char new_path[256];
+
+    dir = opendir(path);
+    if (dir == NULL) {
+        return;
+    }
+
+    while ((ent = readdir(dir)) != NULL) {
+        if (strcmp(ent->d_name, filename) == 0) {
+            printf("File found: %s/%s\n", path, filename);
+        } else if (ent->d_type == DT_DIR && strcmp(ent->d_name, ".") != 0 && strcmp(ent->d_name, "..") != 0) {
+            sprintf(new_path, "%s/%s", path, ent->d_name);
+            search_file(filename, new_path);
+        }
+    }
+
+    closedir(dir);
+}
+
+int main() {
+    char filename[100];
+    printf("Enter the filename: ");
+    scanf("%s", filename);
+    search_file(filename, ".");
+    return 0;
+}
+
+This program prompts the user to enter a filename, then recursively searches for the file starting from the current directory. If the file is found, it prints the file's path.
+
+Note:
+
+- This implementation uses the POSIX dirent.h library, which might not be available on all platforms.
+- The search_file function takes two arguments: the filename to search for and the current path to search in.
+- The main function reads the filename from the user and starts the search from the current directory (".").
+----------------------------------------------------------------------------------------------------------------------------------------------
+// server.mjs
+import { createServer } from 'node:http';
+
+const server = createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end('Hello World!\n');
+});
+
+// starts a simple http server locally on port 3000
+server.listen(3000, '127.0.0.1', () => {
+  console.log('Listening on 127.0.0.1:3000');
+});
+
+// run with `node server.mjs`
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+96 -> 124
+a -> 97
+
+
+java Main Simple Object_Oriented Distributed Robust Secure Portable Multithreaded Dynamic
+-------------------------------------------------------------------------------------------------------------------------------------------
+Quick Sort
+
+Lomuto Partition (module)
+
+int partition(int a[],int l,int h,int p)
+{
+    for(l;l<p;l++)
+    {
+        while(a[l]>a[p])
+        {
+            swap(&a[l],&a[p-1]);
+            if(a[p-1]>a[p])
+            {
+                swap(&a[p-1],&a[p]);
+            }
+            p--;
+        }
+    }
+    return p;
+}
+
+QuickSort (module)
+
+void quicksort(int z[],int l,int p)
+{
+    int pi=partition(z,l,p);
+    if(l>p) return 0;
+    quicksort(z,l,pi-1);
+    quicksort(z,pi+1,p);
+}
+
+Swap (module)
+
+void swap(int *a,int *b)
+{
+    int temp=*a;
+    *a=*b;
+    *b=temp;
+}
