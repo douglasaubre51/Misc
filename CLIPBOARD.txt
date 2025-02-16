@@ -1,3 +1,5 @@
+E:\WORKSPACE\Projects\sql\use garp.sql
+
 //git repo for benihime tutorial
 
 https://github.com/teddysmithdev/RunGroop
