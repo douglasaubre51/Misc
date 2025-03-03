@@ -1,3 +1,28 @@
+ajax in .net core mvc -----------------------------------------------------
+
+    @* document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('add-btn').addEventListener('click', function () {
+            xhr = new XMLHttpRequest();
+            xhr.open('GET', '@Url.Action("AddChannelList", "Admin")', true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    document.getElementById('channel-list').innerHTML = xhr.responseText;
+                }
+            };
+            xhr.send();
+        });
+    }); *@
+
+        //popup window for add channel-list
+        @* let parameters = 'width=300,height=300,menubar=no,toolbar=no,resizable=no'
+    let url = '@Url.Action("AddChannelList", "Admin")'
+
+    document.getElementById('add-btn').addEventListener('click', function () {
+        window.open(url, '_parent', parameters);
+    }); *@
+
+
 https://localhost:8080 - apache httpd web server
 
 Django Startup
