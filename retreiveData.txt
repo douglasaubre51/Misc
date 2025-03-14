@@ -1,0 +1,30 @@
+04-03-2025 11.01.39 PM
+Channels
+Channel Id :1
+Channel Name :allen
+Channel Id :2
+Channel Name :asd
+Channel Id :3
+Channel Name :Karakura Town
+Channel Id :4
+Channel Name :raftel
+Channel Id :1004
+Channel Name :joyboy vlogs
+
+Accounts
+Account id: 1
+Username : Aizen Sosuke
+Account id: 2
+Username : Reze
+Account id: 3
+Username : Boruto Uzumaki
+Account id: 4
+Username : Ken Takakura
+Account id: 5
+Username : Asta
+Account id: 6
+Username : jimbei123@gmail.com
+Account id: 7
+Username : Momo
+Account id: 8
+Username : Luffy

@@ -1,3 +1,7 @@
+# for x server for java swing use
+export DISPLAY=192.168.21.155:0
+before running app
+
 ajax in .net core mvc -----------------------------------------------------
 
     @* document.addEventListener('DOMContentLoaded', function () {
