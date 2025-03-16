@@ -1,3 +1,7 @@
+#for running maven projects:
+mvn exec:java
+in the folder where pom.xml exists! 
+
 # for x server for java swing use
 export DISPLAY=192.168.21.155:0
 before running app
