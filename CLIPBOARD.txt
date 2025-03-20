@@ -1,3 +1,81 @@
+web rtc on java---------------------------------------------------------
+
+import dev.onvoid.webrtc.*;
+import dev.onvoid.webrtc.media.audio.AudioDeviceModule;
+import dev.onvoid.webrtc.media.audio.JavaAudioDeviceModule;
+import dev.onvoid.webrtc.media.video.VideoCapturer;
+import dev.onvoid.webrtc.media.video.VideoDeviceSource;
+import dev.onvoid.webrtc.media.video.VideoTrack;
+
+import javax.websocket.*;
+import java.net.URI;
+import java.nio.ByteBuffer;
+
+public class WebRTCClient {
+
+    private PeerConnectionFactory factory;
+    private PeerConnection peerConnection;
+    private SignalingClient signalingClient;
+
+    public WebRTCClient() {
+        // Initialize WebRTC components
+        PeerConnectionFactory.initialize(PeerConnectionFactory.InitializationOptions.builder().createInitializationOptions());
+        AudioDeviceModule audioDeviceModule = new JavaAudioDeviceModule();
+        factory = new PeerConnectionFactory(null, audioDeviceModule, null);
+        signalingClient = new SignalingClient(this);
+    }
+
+    public void startCall() throws Exception {
+        // Connect to the signaling server
+        signalingClient.connect("ws://localhost:8080/signal");
+
+        // Set up media stream
+        MediaStream mediaStream = factory.createLocalMediaStream("mediaStream");
+
+        // Set up video
+        VideoCapturer videoCapturer = VideoCapturer.create("default");
+        VideoDeviceSource videoSource = new VideoDeviceSource(videoCapturer);
+        VideoTrack videoTrack = factory.createVideoTrack("videoTrack", videoSource);
+        mediaStream.addTrack(videoTrack);
+
+        // Set up audio
+        AudioTrack audioTrack = factory.createAudioTrack("audioTrack", factory.createAudioSource(new MediaConstraints()));
+        mediaStream.addTrack(audioTrack);
+
+        // Configure peer connection
+        PeerConnection.RTCConfiguration rtcConfig = new PeerConnection.RTCConfiguration();
+        peerConnection = factory.createPeerConnection(rtcConfig, new PeerConnectionObserver());
+
+        // Add media stream to peer connection
+        peerConnection.addStream(mediaStream);
+
+        // Create offer
+        peerConnection.createOffer(new SdpObserver() {
+            @Override
+            public void onCreateSuccess(SessionDescription sessionDescription) {
+                peerConnection.setLocalDescription(this, sessionDescription);
+                signalingClient.sendMessage(sessionDescription);
+            }
+
+            @Override
+            public void onSetSuccess() {}
+
+            @Override
+            public void onCreateFailure(String s) {}
+
+            @Override
+            public void onSetFailure(String s) {}
+        }, new MediaConstraints());
+    }
+
+    public void handleSignalingMessage(String message) {
+        // Parse the incoming message
+        // This is a simplified example; in a real application, you'd parse JSON or another structured format
+        if (message.startsWith("offer") || message.startsWith("answer")) {
+            SessionDescription.Type type = message.startsWith("offer") ? SessionDescription.Type.OFFER : SessionDescription.Type.ANSWER;
+            String sdp = message.substring(message.indexOf("\n") +
+::contentReference[oaicite:20]{index=20}
+
 E:\WORKSPACE\Projects\sql\use garp.sql
 
 //git repo for benihime tutorial
