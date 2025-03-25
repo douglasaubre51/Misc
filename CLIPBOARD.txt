@@ -1,5 +1,261 @@
-web rtc on java---------------------------------------------------------
+import org.springframework.web.socket.WebSocketSession;
+import org.springframework.web.socket.handler.TextWebSocketHandler;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+public class SignalingServer extends TextWebSocketHandler {
+
+    private final Map<String, WebSocketSession> sessions = new ConcurrentHashMap<>();
+    private final ObjectMapper objectMapper = new ObjectMapper();
+
+    @Override
+    public void afterConnectionEstablished(WebSocketSession session) {
+        // Add new WebSocket session
+        String sessionId = session.getId();
+        sessions.put(sessionId, session);
+        System.out.println("New connection: " + sessionId);
+    }
+
+    @Override
+    protected void handleTextMessage(WebSocketSession session, org.springframework.web.socket.TextMessage message) throws Exception {
+        // Handle incoming signaling messages (SDP or ICE candidates)
+        String payload = message.getPayload();
+        Map<String, Object> data = objectMapper.readValue(payload, Map.class);
+
+        String targetSessionId = (String) data.get("target");
+        WebSocketSession targetSession = sessions.get(targetSessionId);
+
+        if (targetSession != null && targetSession.isOpen()) {
+            targetSession.sendMessage(new org.springframework.web.socket.TextMessage(payload));
+        }
+    }
+
+    @Override
+    public void afterConnectionClosed(WebSocketSession session, org.springframework.web.socket.CloseStatus status) {
+        // Remove WebSocket session
+        sessions.remove(session.getId());
+        System.out.println("Connection closed: " + session.getId());
+    }
+}
+Configuration
+Register the WebSocket endpoint in Spring Boot:
+
+java
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.socket.config.annotation.EnableWebSocket;
+import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
+import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
+
+@Configuration
+@EnableWebSocket
+public class WebSocketConfig implements WebSocketConfigurer {
+
+    @Override
+    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+        registry.addHandler(new SignalingServer(), "/signaling").setAllowedOrigins("*");
+    }
+}
+2. Java WebRTC Client
+The client uses the signaling server for exchanging SDP and ICE candidates.
+
+Example Client Code
+java
+import dev.onvoid.webrtc.*;
+import dev.onvoid.webrtc.media.audio.AudioDeviceModule;
+import dev.onvoid.webrtc.media.video.VideoDeviceModule;
+import java.net.URI;
+import java.util.Map;
+
+public class WebRTCClient {
+
+    private PeerConnection peerConnection;
+    private WebSocketClient signalingClient;
+
+    public WebRTCClient(String signalingUrl) throws Exception {
+        // Connect to signaling server
+        signalingClient = new WebSocketClient(new URI(signalingUrl)) {
+            @Override
+            public void onMessage(String message) {
+                handleSignalingMessage(message);
+            }
+        };
+        signalingClient.connect();
+
+        // Create PeerConnectionFactory
+        PeerConnectionFactory factory = new PeerConnectionFactory();
+        AudioDeviceModule audioModule = new AudioDeviceModule();
+        VideoDeviceModule videoModule = new VideoDeviceModule();
+        factory.setAudioDeviceModule(audioModule);
+        factory.setVideoDeviceModule(videoModule);
+
+        // Configure PeerConnection
+        RTCConfiguration config = new RTCConfiguration();
+        config.iceServers.add(new RTCIceServer("stun:stun.l.google.com:19302"));
+        peerConnection = factory.createPeerConnection(config, new PeerConnectionObserver() {
+            @Override
+            public void onIceCandidate(IceCandidate candidate) {
+                sendSignalingMessage(Map.of(
+                    "type", "iceCandidate",
+                    "candidate", candidate.sdp,
+                    "sdpMid", candidate.sdpMid,
+                    "sdpMLineIndex", candidate.sdpMLineIndex
+                ));
+            }
+        });
+
+        // Create Offer SDP
+        peerConnection.createOffer(new SDPObserver() {
+            @Override
+            public void onSuccess(SessionDescription sdp) {
+                peerConnection.setLocalDescription(new SDPObserver() {
+                    @Override
+                    public void onSuccess() {
+                        System.out.println("Local SDP Set Successfully");
+                    }
+                }, sdp);
+
+                sendSignalingMessage(Map.of("type", "offer", "sdp", sdp.sdp));
+            }
+        });
+    }
+
+    private void sendSignalingMessage(Map<String, Object> message) {
+        signalingClient.sendMessage(new ObjectMapper().writeValueAsString(message));
+    }
+
+    private void handleSignalingMessage(String message) throws Exception {
+        Map<String, Object> data = new ObjectMapper().readValue(message, Map.class);
+        String type = (String) data.get("type");
+
+        if ("answer".equals(type)) {
+            SessionDescription remoteSdp = new SessionDescription(SessionDescriptionType.ANSWER, (String) data.get("sdp"));
+            peerConnection.setRemoteDescription(new SDPObserver() {
+                @Override
+                public void onSuccess() {
+                    System.out.println("Remote SDP Set Successfully");
+                }
+            }, remoteSdp);
+        } else if ("iceCandidate".equals(type)) {
+            IceCandidate candidate = new IceCandidate(
+                (String) data.get("sdpMid"),
+                (int) data.get("sdpMLineIndex"),
+                (String) data.get("candidate")
+            );
+            peerConnection.addIceCandidate(candidate);
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+        new WebRTCClient("ws://localhost:8080/signaling");
+    }
+}
+How It Works
+Spring Boot WebSocket Signaling Server:
+
+Acts as a relay for SDP and ICE candidate exchange between peers.
+
+Java WebRTC Client:
+
+Connects to the signaling server using WebSocket.
+
+Creates SDP offers and ICE candidates.
+
+Adds remote SDP and ICE candidates received from the signaling server.
+
+Would you like me to elaborate on specific parts (e.g., setting up the WebSocket client or testing the signaling process)? Just let me know3
+
+
+
+
+
+how to send videostreams and audio streams on this
+To send video and audio streams in a WebRTC application using Java, you need to work with WebRTC's media track and stream APIs. Here’s how to integrate audio and video streams into your setup using the webrtc-java library:
+
+1. Media Stream Basics
+In WebRTC:
+
+A MediaStream is a collection of media tracks (audio and/or video).
+
+Tracks can be added to a PeerConnection and shared between peers.
+
+The local stream contains tracks you capture (e.g., camera/microphone).
+
+The remote stream contains tracks received from the other peer.
+
+2. Capturing Audio and Video
+You can capture audio and video using modules provided by the webrtc-java library, or use your custom sources for media.
+
+Example:
+java
+import dev.onvoid.webrtc.media.audio.*;
+import dev.onvoid.webrtc.media.video.*;
+
+public MediaStream captureMedia(PeerConnectionFactory factory) {
+    // Create MediaStream
+    MediaStream mediaStream = factory.createLocalMediaStream("localStream");
+
+    // Capture Audio
+    AudioDeviceModule audioDevice = new AudioDeviceModule();
+    AudioTrack audioTrack = factory.createAudioTrack("audioTrack", audioDevice.createAudioSource());
+    mediaStream.addTrack(audioTrack);
+
+    // Capture Video
+    VideoDeviceModule videoDevice = new VideoDeviceModule();
+    VideoSource videoSource = videoDevice.createVideoSource();
+    VideoTrack videoTrack = factory.createVideoTrack("videoTrack", videoSource);
+    mediaStream.addTrack(videoTrack);
+
+    System.out.println("Audio and Video tracks added to the local MediaStream.");
+    return mediaStream;
+}
+3. Adding Local Media Stream to PeerConnection
+You can attach the MediaStream (captured above) to your PeerConnection for sharing with the remote peer.
+
+Example:
+java
+public void addLocalStreamToPeerConnection(PeerConnection peerConnection, MediaStream localStream) {
+    peerConnection.addStream(localStream);
+    System.out.println("Local MediaStream added to PeerConnection.");
+}
+4. Handling Remote Media Stream
+The remote peer’s media stream is received via WebRTC events. You can listen for remote tracks and play them using an appropriate media player.
+
+Example:
+java
+peerConnection.addTrack(new MediaStreamTrackObserver() {
+    @Override
+    public void onAddTrack(MediaStreamTrack track) {
+        System.out.println("Remote track added: " + track.kind());
+
+        if (track.kind().equals(MediaStreamTrackKind.VIDEO)) {
+            // Handle incoming video (e.g., render it on the UI)
+        } else if (track.kind().equals(MediaStreamTrackKind.AUDIO)) {
+            // Handle incoming audio (e.g., play it on speakers)
+        }
+    }
+});
+5. Signaling
+Ensure the signaling server exchanges SDP and ICE candidates between peers. When the peer connection is established, the media streams will flow automatically.
+
+Full Code Workflow
+Here’s how it all ties together:
+
+Capture Local Media: Use AudioDeviceModule and VideoDeviceModule to create media sources.
+
+Add Media to PeerConnection: Attach the local media stream to your PeerConnection.
+
+Signal SDP and ICE Candidates: Exchange SDP/ICE using your Spring Boot WebSocket signaling server.
+
+Play Remote Media: Receive remote tracks and handle them.
+
+This approach ensures both audio and video streams are successfully transmitted between peers. Let me know if you'd like me to expand on any part! 🚀
+
+
+
+web rtc on java---------------------------------------------------------
+	
 import dev.onvoid.webrtc.*;
 import dev.onvoid.webrtc.media.audio.AudioDeviceModule;
 import dev.onvoid.webrtc.media.audio.JavaAudioDeviceModule;
