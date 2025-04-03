@@ -1,3 +1,5 @@
+#supabase db password : FNzNQ9vwJZo2mfvN
+
 #for running maven projects:
 mvn exec:java
 in the folder where pom.xml exists! 
