@@ -1,3 +1,8 @@
+# waguri SendGrid api-key : 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
+
+
+# twilio SendGrid recovery key : U6LVK666YD7K6DQBGAEJQHF4
+
 #supabase db password : FNzNQ9vwJZo2mfvN
 
 #for running maven projects:

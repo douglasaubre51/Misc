@@ -1,3 +1,19 @@
+Seminar topic - SvelteJS :
+
+Svelte.js is a modern JavaScript framework that is quickly gaining popularity among developers. Unlike other frameworks such as React or Angular, Svelte does not use a virtual DOM, which results in a faster and more efficient performance. Svelte’s approach to building web applications is unique and allows developers to write efficient and concise code. One of the main benefits of Svelte is its small size and low overhead. Unlike other frameworks, Svelte does not require additional libraries or dependencies, making it easy to set up and get started with. Furthermore, Svelte’s approach to building web applications eliminates the need for complex build tools and configurations, making it a great choice for developers of all skill levels. Svelte also offers a more intuitive and straightforward way to build web applications. Instead of using a complex set of APIs, Svelte’s syntax is easy to understand and follow, making it a great choice for developers who are new to web development.
+
+
+box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+https://github.com/douglasaubre51/maki
+
+
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 import com.fasterxml.jackson.databind.ObjectMapper;
