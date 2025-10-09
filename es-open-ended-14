@@ -1,0 +1,62 @@
+/*
+ * exp_8_b.c
+ *
+ * Created: 03-10-2025 6.16.12 AM
+ *  Author: MAC
+ */ 
+
+#include <avr/io.h>
+
+void T1Delay();
+void T2Delay();
+
+int main(void)
+{
+    DDRD = 0xFF;
+	
+	while(1)
+	{
+		
+		PORTD = 0b01010101;
+		T2Delay();
+		PORTD = 0b01011010;
+		T2Delay();
+		PORTD = 0b10010110;
+		T2Delay();
+		PORTD = 0b01100110; 
+		T2Delay();
+		
+		
+		
+	}
+	
+	return 0;
+}
+
+void T1Delay()
+{
+	TCNT1H = 0x00;
+	TCNT1L = 0x00;
+	
+	TCCR1A = 0x00;
+	TCCR1B = 0x04;
+	
+	while((TIFR & (0x1 << TOV1)) == 0);
+	
+	TCCR1B = 0;
+	TIFR = 0x1 << TOV1;
+}
+void T2Delay()
+{
+	TCNT1H = 0x00;
+	TCNT1L = 0x00;
+		
+	TCCR1A = 0x00;
+	TCCR1B = 0x03;
+	
+	while((TIFR & (0x1 << TOV1)) == 0);
+	
+	TCCR1B = 0;
+	TIFR = 0x1 << TOV1;
+}
+
