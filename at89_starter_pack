@@ -1,0 +1,18 @@
+1. Core components
+
+[ ] - 1x Microcontroller: Atmel/Microchip AT89S52 (the 40-pin DIP version is best for breadboards).
+[ ] - 1x Crystal Oscillator: 11.0592 MHz or 12 MHz. (11.0592 MHz is better if you plan to do Serial/UART communication later).
+[ ] - 1x USBASP Programmer: This is the bridge between your computer and the chip. It usually comes with a 10-pin ribbon cable.
+
+
+2. The Support Components (The "Clock" & "Reset")
+
+[ ] - 2x Ceramic Capacitors (22pF or 33pF): These go with the crystal to stabilize the clock.
+[ ] - 1x Electrolytic Capacitor (10µF): For the Reset circuit.
+[ ] - 1x Resistor (10kΩ): To pull the Reset pin to Ground.
+[ ] - 1x Push Button (Optional): If you want a manual "Reset" button.
+
+3. Setup tools
+[ ] - 1x Breadboard: Large (830 points) is recommended.
+[ ] - Jumper Wires: A pack of male-to-male wires.
+[ ] - Power Source: You can actually use the 5V provided by the USBASP programmer itself, or a dedicated 5V breadboard power module.
