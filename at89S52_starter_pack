@@ -1,0 +1,12 @@
+1   Microcontroller AT89S52-24PU (The "S" is for programming; "PU" is for breadboards)  1 or 2
+2   Programmer  USBASP V2.0 (Usually comes with a 10-pin ribbon cable)  1
+3   Crystal 11.0592 MHz HC-49S (Standard silver "can" shape)    2
+4   Capacitors (Clock)  22pF Ceramic Disc Capacitors    10-pack
+5   Capacitor (Reset)   10µF Electrolytic Capacitor (25V or 50V is fine)    5-pack
+6   Resistors (Reset)   10kΩ Resistors (1/4 Watt)   10-pack
+7   Resistors (LEDs)    330Ω Resistors (1/4 Watt)   10-pack
+8   LEDs    5mm LEDs (Mixed colors: Red, Green, Yellow) 10-pack
+9   Breadboard  830 Points Solderless Breadboard (Full Size)    1
+10  Wires   Male-to-Male Jumper Wires (65-piece bundle) 1 pack
+11  Power Module    MB102 Breadboard Power Supply (Clips onto the board)    1
+12  Adapter 9V 1A DC Power Adapter (To plug the power module into the wall) 1
