@@ -1,7 +1,7 @@
 Espressif ESP 8266 IOT:
 
 [x] - LDR
-[ ] - DHT-11
+[x] - DHT-11
 [ ] - MQ - 2
 [x] - Touch sensor
 
@@ -12,22 +12,23 @@ Atmega AT 89S52 Microcontroller project:
 [x] -  Breadboard  830 Points Solderless Breadboard (Full Size)
 [ ] -  Programmer  USBASP V2.0 (Usually comes with a 10-pin ribbon cable)
 [ ] -  Power Module    MB102 Breadboard Power Supply (Clips onto the board)
-[ ] -  Adapter 9V 1A DC Power Adapter (To plug the power module into the wall)
+[x] -  Adapter 9V 1A DC Power Adapter (To plug the power module into the wall)
 
-[ ] -  Crystal 11.0592 MHz HC-49S (Standard silver "can" shape)
-[ ] -  Capacitors (Clock)  22pF Ceramic Disc Capacitors    x2
+[x] -  Crystal 11.0592 MHz HC-49S (Standard silver "can" shape)
+[x] -  Capacitors (Clock)  22pF Ceramic Disc Capacitors    x2
 
-[ ] -  Capacitor (Reset)   10µF Electrolytic Capacitor (25V or 50V is fine)(To reset the microcontroller on program load) x2
-[ ] -  Resistors (Reset)   10kΩ Resistors (1/4 Watt) (For the pins 32 - 39)   x10 
+[x] -  Capacitor (Reset)   10µF Electrolytic Capacitor (25V or 50V is fine)(To reset the microcontroller on program load) x2
+[x] -  Resistors (Reset)   10kΩ Resistors (1/4 Watt) (For the pins 32 - 39)   x10 
 [x] -  Tactile Push Button x2
 
 [x] -  Jumpers   (Male-to-Male) x20
 
 [x] -  LEDs    5mm LEDs  x5
-[ ] -  Resistors (LEDs)    330Ω Resistors (1/4 Watt)   x5
+[x] -  Resistors (LEDs)    330Ω Resistors (1/4 Watt)   x5
 
 
 Other:
 
 [ ] - Cable Extension Box
+
 
