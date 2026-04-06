@@ -1,0 +1,35 @@
+Cross Platform:
+MAUI
+MAUI-Blazor Hybrid
+Flutter
+
+
+Android:
+Jetpack Compose
+Android Views
+
+
+Desktop:
+Windows Presentation Foundation
+WinUI 3
+Swing
+
+
+Web Fullstack (SSR):
+Django
+.NET Core MVC
+Laravel
+
+
+Web Frontend:
+Blazor WASM
+React
+Angular
+
+
+Web Api:
+Minimal Api
+Spring-boot
+Express
+Laravel
+Django REST
